@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pernikahan Marsal & Hasna</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Landing Page Section -->
+    <div class="landing-container" id="landing-page">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>Selamat Datang di Pernikahan Kami</h1>
+            <p>Marsal Perdana Putra & Hasna Ainur</p>
+            <button id="btn-invitation">Lihat Undangan</button>
+        </div>
+    </div>
+
+    <!-- Wedding Page Section (Hidden by Default) -->
+    <div id="wedding-page" style="display: none;">
+        <header>
+            <h1>Undangan Pernikahan</h1>
+            <p>Marsal Perdana Putra & Hasna Ainur</p>
+            <p>Tanggal: 20 Desember 2024</p>
+        </header>
+
+        <section id="countdown">
+            <h2>Hitung Mundur Menuju Hari Pernikahan</h2>
+            <p id="time"></p>
+        </section>
+
+        <section id="about">
+            <h2>Tentang Kami</h2>
+            <p>Cerita singkat tentang Marsal dan Hasna, bagaimana mereka bertemu, dan perjalanan cinta mereka.</p>
+        </section>
+
+
+      
+        <!-- Audio Element for "Beautiful in White" -->
+        <audio id="wedding-music" src="beautiful-in-white.mp3" preload="auto"></audio>
+
+
+        <section id="gallery">
+            <h2>Galeri Foto</h2>
+            <div class="gallery-container">
+                <img src="foto1.jpg" alt="Foto 1">
+                <img src="foto2.jpg" alt="Foto 2">
+                <img src="foto3.jpg" alt="Foto 3">
+            </div>
+        </section>
+
+        <section id="schedule">
+            <h2>Jadwal Acara</h2>
+            <ul>
+                <li>Resepsi: 20 Desember 2024, 10:00 - 13:00</li>
+                <li>Pemberkatan: 20 Desember 2024, 14:00 - 16:00</li>
+                <li>Pesta: 20 Desember 2024, 18:00 - 22:00</li>
+            </ul>
+        </section>
+
+        <section id="rsvp">
+            <h2>RSVP Pernikahan Marsal & Hasna</h2>
+            <p>Kami dengan senang hati menantikan kehadiran Anda pada hari istimewa kami. Mohon konfirmasi kehadiran sebelum <strong>[Tanggal Batas RSVP]</strong>.</p>
+            <form>
+                <label for="name">Nama:</label>
+                <input type="text" id="name" name="name" required>
+        
+                <label for="guests">Jumlah tamu:</label>
+                <input type="number" id="guests" name="guests" min="1" required>
+        
+                <p>Untuk informasi lebih lanjut, silakan hubungi:</p>
+                <p>Telepon: <strong>[Nomor Telepon]</strong></p>
+                <p>Email: <strong>[Alamat Email]</strong></p>
+        
+                <button type="submit">Konfirmasi Kehadiran</button>
+            </form>
+        </section>
+
+
+        <section id="location">
+            <h2>Lokasi</h2>
+            <p>Jl. apakek No. 123, Jakarta</p>
+            <div id="map"></div>
+        </section>
+
+        <footer>
+            <p>© 2024 Marsal Perdana Putra & Hasna Ainur</p>
+        </footer>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan halaman pernikahan dan menyembunyikan landing page
+        function openWeddingPage() {
+            document.getElementById("landing-page").style.display = "none";
+            document.getElementById("wedding-page").style.display = "block";
+        }
+
+          
+            // Memutar musik setelah undangan dibuka
+            var music = document.getElementById("wedding-music");
+            music.play();
+        
+
+        // Menambahkan event listener untuk tombol "Lihat Undangan"
+        document.getElementById("btn-invitation").addEventListener("click", openWeddingPage);
+
+        // Fungsi Hitung Mundur
+        const countdown = () => {
+            const eventDate = new Date("December 20, 2024 10:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("time").innerHTML = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
+
+            if (distance < 0) {
+                document.getElementById("time").innerHTML = "Acara Telah Selesai";
+            }
+        };
+
+        setInterval(countdown, 1000);
+    </script>
+</body>
+</html>
